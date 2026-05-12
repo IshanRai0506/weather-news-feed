@@ -203,9 +203,11 @@ function useWeather(query) {
       setForecast(Object.values(days).slice(0, 5));
     } catch (e) { setError(e.message); }
     finally { setLoading(false); }
-  }, [data]);
+  }, []);
 
-  useEffect(() => { if (query) fetchWeather(query); }, [query]);
+useEffect(() => {
+  if (query) fetchWeather(query);
+}, [query, fetchWeather]);
   return { data, forecast, hourly, loading, error, prevTemp: prevTempRef.current, refetch: fetchWeather };
 }
 
